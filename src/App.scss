@@ -1,0 +1,80 @@
+@import './style/variables.scss';
+@import './style/null.scss';
+@import './style/button.scss';
+
+.app {
+   width: 1100px;
+   margin: 0 auto;
+   padding: 50px 0 50px 0;
+   position: relative;
+   &__header {
+       display: flex;
+       justify-content: space-between;
+   }
+   &__title {
+       font-weight: bold;
+       font-size: 28px;
+       line-height: 37px;
+       span {
+           color: $main-color;
+       }
+   }
+   &__menu {
+       ul {
+           display: flex;
+           justify-content: space-between;
+           font-weight: bold;
+           font-size: 24px;
+           line-height: 32px;
+           li {
+               margin: 0 8px;
+               a:hover {
+                   color: $main-color;
+               }
+           }
+       }
+   }
+   &__banner {
+       width: 100%;
+       background-color: $dark;
+       height: 100px;
+       padding: 0 25px 0 45px;
+       display: grid;
+       grid-template-columns: 152px auto 133px;
+       &-text {
+           font-weight: bold;
+           font-size: 24px;
+           line-height: 32px;
+           color: #FFFFFF;
+           padding-left: 83px;
+           padding-top: 18px;
+       }
+   }
+   .bg-decoration {
+       position: absolute;
+       right: -174px;
+       bottom: -70px;
+       z-index: -1;
+   }
+}
+
+main {
+   margin-top: 50px;
+   position: relative;
+}
+
+.pulse {
+   animation: pulse 1.5s ease-in-out .5s infinite
+}
+
+@keyframes pulse {
+   0% {
+       opacity: 1
+   }
+   50% {
+       opacity: .4
+   }
+   100% {
+       opacity: 1
+   }
+}
