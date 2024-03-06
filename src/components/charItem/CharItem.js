@@ -1,12 +1,11 @@
-import abyss from '../../resources/img/abyss.jpg';
-
 //char__item_selected
 
-const CharItem = () => {
+const CharItem = ({src, name}) => {
+   const style = src.indexOf('image_not_available') > -1 ? {objectFit: 'contain'} : null;
    return (
       <li className="char__item">
-            <img src={abyss} alt="abyss"/>
-            <div className="char__name">Abyss</div>
+            <img style={style} src={src} alt={name}/>
+            <div className="char__name">{name}</div>
       </li>
    )
 }
