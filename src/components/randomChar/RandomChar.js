@@ -94,7 +94,7 @@ const View = ({char}) => {
          <div className="randomchar__info">
             <p className="randomchar__name">{name}</p>
             <p className="randomchar__descr">
-               {!description ? 'Нет описания для этого персонажа' :
+               {!description ? 'No info about this character' :
                description.length > 200 ? description.slice(0, 200) + '...' : description}
             </p>
             <div className="randomchar__btns">

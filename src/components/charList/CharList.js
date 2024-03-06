@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import CharItem from '../charItem/CharItem';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
@@ -52,8 +51,13 @@ class CharList extends Component {
 
    renderList = (data) => {
       const items = data.map(item => {
+         const style = item.thumbnail.indexOf('image_not_available') > -1 ? {objectFit: 'contain'} : null;
+         
          return (
-            <CharItem key={item.id} src={item.thumbnail} name={item.name}/>
+            <li key={item.id} className="char__item" onClick={() => this.props.onSelectedChar(item.id)}>
+               <img style={style} src={item.thumbnail} alt={item.name}/>
+               <div className="char__name">{item.name}</div>
+            </li>
          )
       })
 
