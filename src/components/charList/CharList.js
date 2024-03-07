@@ -10,27 +10,34 @@ class CharList extends Component {
       charList: [],
       loading: true,
       error: false,
+      newListLoading: false,
+      offset: 0,
+      listEnded: false
    }
 
    marvelService = new MarvelService();
 
-   componentDidMount = () => {
+   componentDidMount() {
       this.updateList();
    }
 
-   onListLoaded = (data) => {
-      this.setState(() => {
+   onListLoaded = (newList) => {
+      const ended = newList.length < 9 ? true : false;
+
+      this.setState(({charList, offset}) => {
          return {
-            charList: data,
-            loading: false
+            charList: [...charList, ...newList],
+            loading: false,
+            newListLoading: false,
+            offset: offset + 9,
+            listEnded: ended
          }
       })
    }
 
    onListLoading = () => {
       this.setState({
-         loading: true,
-         error: false
+         newListLoading: true
       })
    }
 
@@ -41,10 +48,10 @@ class CharList extends Component {
       })
    }
 
-   updateList = () => {
+   updateList = (offset) => {
       this.onListLoading();
 
-      this.marvelService.getAllCharacters()
+      this.marvelService.getAllCharacters(offset)
       .then(this.onListLoaded)
       .catch(this.onError)
    }
@@ -69,7 +76,7 @@ class CharList extends Component {
    }
 
    render() {
-      const {charList, loading, error} = this.state;
+      const {charList, loading, error, newListLoading, offset, listEnded} = this.state;
       const list = this.renderList(charList);
 
       const errorMessage = error ? <ErrorMessage/> : null;
@@ -81,7 +88,11 @@ class CharList extends Component {
             {errorMessage}
             {spinner}
             {listBlock}
-            <button className="button button__main button__long">
+            <button 
+               className="button button__main button__long"
+               disabled={newListLoading}
+               style={{'display': listEnded ? 'none' : 'block'}}
+               onClick={() => this.updateList(offset)}>
                <div className="inner">load more</div>
             </button>
          </div>

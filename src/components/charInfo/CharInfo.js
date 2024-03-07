@@ -4,8 +4,6 @@ import Spinner from '../spinner/Spinner';
 import SkeletonApp from '../skeletonApp/SkeletonApp';
 import MarvelService from '../../services/MarvelService';
 
-import thor from '../../resources/img/thor.jpeg'
-
 class CharInfo extends Component {
    state = {
       char: null,
@@ -15,11 +13,11 @@ class CharInfo extends Component {
 
    marvelService = new MarvelService()
 
-   componentDidMount = () => {
+   componentDidMount() {
       this.updateChar();
    }
 
-   componentDidUpdate = (prevProps) => {
+   componentDidUpdate(prevProps) {
       if (this.props.selectedCharId !== prevProps.selectedCharId) this.updateChar();
    }
 
