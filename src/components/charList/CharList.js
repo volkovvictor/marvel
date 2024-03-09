@@ -56,14 +56,24 @@ class CharList extends Component {
       .catch(this.onError)
    }
 
+   onSelectedCharByKey = (e, id) => {
+      if(e.code === "Enter") this.props.onSelectedChar(id)
+   }
+
    renderList = (data) => {
+      const {selectedChar} = this.props;
       const items = data.map(item => {
          const style = item.thumbnail.indexOf('image_not_available') > -1 ? {objectFit: 'contain'} : null;
-         
+         const selectedClass = selectedChar && item.id === selectedChar ? "char__item_selected" : null;
          return (
-            <li key={item.id} className="char__item" onClick={() => this.props.onSelectedChar(item.id)}>
-               <img style={style} src={item.thumbnail} alt={item.name}/>
-               <div className="char__name">{item.name}</div>
+            <li 
+               key={item.id} 
+               className={"char__item " + selectedClass}
+               onClick={() => this.props.onSelectedChar(item.id)}
+               onKeyDown={(e) => this.onSelectedCharByKey(e, item.id)}
+               tabIndex='0'>
+                  <img style={style} src={item.thumbnail} alt={item.name}/>
+                  <div className="char__name">{item.name}</div>
             </li>
          )
       })
