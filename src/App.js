@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import HeaderApp from './components/headerApp/HeaderApp';
 import RandomChar from './components/randomChar/RandomChar';
 import CharList from './components/charList/CharList';
@@ -8,36 +8,33 @@ import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
 import vision from './resources/img/vision.png';
 import './App.scss'
 
-class App extends Component {
-   state = {
-      selectedChar: null
+const App = () => {
+
+   const [selectedChar, setSelectedChar] = useState(null)
+
+   const onSelectedChar = (id) => {
+      setSelectedChar(id)
    }
 
-   onSelectedChar = (id) => {
-      this.setState({selectedChar: id})
-   }
-
-   render() {
-      return (
-         <div className="app">
-            <HeaderApp/>
-            <main>
+   return (
+      <div className="app">
+         <HeaderApp/>
+         <main>
+            <ErrorBoundary>
+               <RandomChar/>
+            </ErrorBoundary>
+            <div className="char__content">
                <ErrorBoundary>
-                  <RandomChar/>
+                  <CharList selectedChar={selectedChar} onSelectedChar={onSelectedChar}/>
                </ErrorBoundary>
-               <div className="char__content">
-                  <ErrorBoundary>
-                     <CharList selectedChar={this.state.selectedChar} onSelectedChar={this.onSelectedChar}/>
-                  </ErrorBoundary>
-                  <ErrorBoundary>
-                     <CharInfo selectedCharId={this.state.selectedChar}/>
-                  </ErrorBoundary>
-               </div>
-               <img className="bg-decoration" src={vision} alt="vision"/>
-            </main>
-         </div>
-      )
-   }
+               <ErrorBoundary>
+                  <CharInfo selectedCharId={selectedChar}/>
+               </ErrorBoundary>
+            </div>
+            <img className="bg-decoration" src={vision} alt="vision"/>
+         </main>
+      </div>
+   )
 }
 
 export default App;
