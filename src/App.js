@@ -4,6 +4,8 @@ import RandomChar from './components/randomChar/RandomChar';
 import CharList from './components/charList/CharList';
 import CharInfo from './components/charInfo/CharInfo';
 import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
+import BannerApp from './components/bannerApp/BannerApp';
+import ComicsList from './components/comicsList/ComicsList';
 
 import vision from './resources/img/vision.png';
 import './App.scss'
@@ -19,7 +21,7 @@ const App = () => {
    return (
       <div className="app">
          <HeaderApp/>
-         <main>
+         {/*<main>
             <ErrorBoundary>
                <RandomChar/>
             </ErrorBoundary>
@@ -32,6 +34,12 @@ const App = () => {
                </ErrorBoundary>
             </div>
             <img className="bg-decoration" src={vision} alt="vision"/>
+         </main>*/}
+         <main>
+            <BannerApp/>
+            <ErrorBoundary>
+               <ComicsList/>
+            </ErrorBoundary>
          </main>
       </div>
    )
