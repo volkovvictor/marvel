@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import useMarvelService from '../../services/MarvelService';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
@@ -34,22 +35,22 @@ const ComicsList = () => {
    }
 
    const renderList = (data) => {
-      const items = data.map(item => {
+      const items = data.map((item, index) => {
          const style = item.thumbnail.indexOf('image_not_available') > -1 ? {objectFit: 'contain'} : null;
          return (
             <li 
-            key={item.id}
+            key={index}
             tabIndex="0" 
             className="comics__item">
-               <a href="#">
+               <Link to={`/comics/${item.id}`}>
                      <img 
                      src={item.thumbnail} 
                      alt={item.title} 
                      className="comics__item-img"
                      style={style}/>
                      <div className="comics__item-name">{item.title}</div>
-                     <div className="comics__item-price">{item.price ? item.price + "$" : "NOT AVAILABLE"}</div>
-               </a>
+                     <div className="comics__item-price">{item.price}</div>
+               </Link>
             </li>
          )
       })
