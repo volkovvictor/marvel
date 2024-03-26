@@ -1,0 +1,27 @@
+.find {
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+    padding: 25px;
+    margin-top: 30px;
+    background-color: #fff;
+    &__form {
+        display: flex;
+        width: 100%;
+    }
+
+    input {
+        flex: 1 1 auto;
+        display: block;
+        height: 38px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        margin-right: 24px;
+        border: none;
+        padding: 0 10px;
+    }
+
+    p {
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+}
